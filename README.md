@@ -19,7 +19,7 @@
 <!-- RELEASES:START -->
 | Версия | Дата | Изменения |
 | --- | --- | --- |
-| [v0.2.0](https://github.com/atroid25/StudyAssistant-releases/releases/tag/v0.2.0) | 2026-09-21 | Что нового |
+| [v0.2.0](https://github.com/atroid25/StudyAssistant-releases/releases/tag/v0.2.0) | 2026-09-21 | Локальный ИИ по умолчанию. Qwen3-1.7B создаёт конспекты и карточки, а Whisper Base распознаёт речь. После загрузки моделей локальная обработка доступна без интернета и API-ключей. |
 <!-- RELEASES:END -->
 
 ## Обновления
