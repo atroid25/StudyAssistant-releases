@@ -18,7 +18,8 @@ def table(releases):
     rows = ['| Версия | Дата | Изменения |', '| --- | --- | --- |']
     for release in sorted(releases, key=lambda r: version(r['tag_name']), reverse=True):
         lines = [line.strip().lstrip('#- ').strip() for line in (release.get('body') or '').splitlines()]
-        summary = next((s for s in lines if s and not s.startswith('StudyAssistant')), 'Описание не добавлено')
+        changes = next((i + 1 for i, line in enumerate(lines) if line.casefold() in {'что нового', 'что изменилось'}), 0)
+        summary = next((line for line in lines[changes:] if line and not re.fullmatch(r'StudyAssistant(?: \d+\.\d+\.\d+)?', line)), 'Описание не добавлено')
         summary = summary.replace('|', '\\|').replace('<', '&lt;').replace('>', '&gt;')[:180]
         tag = release['tag_name']
         url = 'https://github.com/atroid25/StudyAssistant-releases/releases/tag/' + quote(tag, safe='')
