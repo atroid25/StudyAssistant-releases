@@ -1,0 +1,26 @@
+name: Sync release descriptions
+on:
+  release:
+    types: [published, edited, deleted, unpublished]
+  push:
+    branches: [main]
+    paths: ['release-notes/**', 'scripts/sync_releases.py', '.github/workflows/release-descriptions.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: release-descriptions
+  cancel-in-progress: false
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python scripts/sync_releases.py
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
